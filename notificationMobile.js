@@ -1,6 +1,6 @@
 import { LitElement, html, css } from "lit";
 import "./notification.scss";
-import "../link/link"
+import "../link/link";
 import {
   success,
   error,
@@ -66,6 +66,10 @@ class NotificationMobile extends LitElement {
       }
 
       .notification-title {
+        white-space: nowrap; /* Impide que el texto se ajuste en líneas múltiples */
+        overflow: hidden; /* Oculta cualquier texto que sobrepase el elemento */
+        text-overflow: ellipsis; /* Añade puntos suspensivos al f
+      
         color: var(--textual-basic-dark, #030303);
         font-family: Inter;
         font-size: 16px;
@@ -74,7 +78,7 @@ class NotificationMobile extends LitElement {
         line-height: 26px; /* 162.5% */
         letter-spacing: 0.019px;
         flex: 1 0 0;
-        margin-left:8px;
+        margin-left: 8px;
       }
 
       .notification-subtitle {
@@ -86,18 +90,12 @@ class NotificationMobile extends LitElement {
         font-weight: 400;
         line-height: 26px; /* 162.5% */
         letter-spacing: 0.019px;
-     
       }
 
       .notification-link {
-       
         margin-top: 8px;
-   
       }
-      .textLimiting{
-
-
-      
+      .textLimiting {
       }
       .close-btn {
         position: absolute;
@@ -258,18 +256,15 @@ class NotificationMobile extends LitElement {
         break;
     }
 
-    const boxShadowStyle =
-      this.displayStyle === "inline" ? "none" : "var(--elevation-LG)";
+    const boxShadowStyle = this.displayStyle === "inline" ? "none" : "var(--elevation-LG)";
     if (!this.isVisible) {
       return html``;
     }
 
     return html`
-  
       <div
         class="${notificationClasses}"
-        style="background-color: ${this
-        .customBackgroundColor}; box-shadow: ${boxShadowStyle}"
+        style="background-color: ${this.customBackgroundColor}; box-shadow: ${boxShadowStyle}"
       >
         <div class="notification-content">
           <div class="notification-title-container">
@@ -281,26 +276,16 @@ class NotificationMobile extends LitElement {
           </div>
           <div class="notification-subtitle">${this.notification.text}</div>
           ${this.showInteractiveLink
-        ? html`  <div class="notification-link">
-            <sdss-link 
-            size="regular"
-            link-role="link"
-            href="#"
-            title="descripción"
-            !darkBackground
-           >
-          Interactive Link
-          </sdss-link>
-       
-            </div>`
-        : html``
-      }
+            ? html` <div class="notification-link">
+                <sdss-link size="regular" link-role="link" href="#" title="descripción" !darkBackground>
+                  Interactive Link
+                </sdss-link>
+              </div>`
+            : html``}
         </div>
         <div class="textLimiting">
-        <button class="close-btn" @click="${this.closeNotification}">
-          ${closeImgBtn}
-        </button>
-    </div>
+          <button class="close-btn" @click="${this.closeNotification}">${closeImgBtn}</button>
+        </div>
       </div>
     `;
   }
