@@ -23,6 +23,18 @@ export default {
       control: { type: "boolean" },
       defaultValue: true,
     },
+    title: {
+      control: { type: "text" },
+      defaultValue: "Título de ejemplo",
+    },
+    text: {
+      control: { type: "text" },
+      defaultValue: "Subtítulo de ejemplo",
+    },
+    interactiveLink: {
+      control: { type: "text" },
+      defaultValue: "Texto del enlace interactivo",
+    },
   },
 };
 
@@ -39,12 +51,17 @@ const Template = ({
   tipoNotificacion,
   displayStyle,
   showInteractiveLink,
+  title, // Nuevo argumento
+  text, // Nuevo argumento
+  interactiveLink, // Nuevo argum
 }) => {
-  const selectedBackgroundColor =
-    backgroundColorMap[tipoNotificacion] || "#E5F6F1"; // Default color
+  const selectedBackgroundColor = backgroundColorMap[tipoNotificacion] || "#E5F6F1"; // Default color
 
   return html`
     <notification-mobile
+    title: title, // Usa el argumento
+    text: text, // Usa el argumento
+    interactiveLink: interactiveLink, // U
       .customBackgroundColor=${selectedBackgroundColor}
       .notification=${{
         title: "Title",
